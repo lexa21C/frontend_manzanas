@@ -103,7 +103,7 @@ export default {
 }
 
 .transparent-card {
-  background-color: rgba(227, 204, 205, 0.7); /* Fondo semitransparente */
+  background-color: rgba(227, 204, 205, 0.89); /* Fondo semitransparente */
   padding: 20px;
   margin: 60px;
   margin-top: 150px;

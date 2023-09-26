@@ -1,22 +1,42 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import ListadoManzanas from '@/views/ListadoManzanas.vue'
+import ListadoServicios from '@/views/ListadoServicios.vue'
+import Registrar from '@/views/Registrar.vue'
+import ListadoEstablecimientos from '@/views/ListadoEstablecimientos.vue'
+import CrearManzanas from '@/views/CrearManzanas.vue'
+import EditarManzanas from '@/views/EditarManzanas.vue'
+import CrearServicios from '@/views/CrearServicios.vue'
+import EditarServicios from '@/views/EditarServicios.vue'
+import Login from '@/views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/listado-manzanas',
+    name: 'listado-manzanas',
+    component: ListadoManzanas
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/listado-servicios',
+    name: 'listado-servicios',
+    component: ListadoServicios
+  },
+  {
+    path: '/listado-establecimientos',
+    name: 'listado-establecimientos',
+    component: ListadoServicios
+  },
+  {
+    path: '/registrar',
+    name: 'registrar',
+    component: Registrar
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
   }
 ]
 

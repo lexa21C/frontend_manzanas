@@ -24,6 +24,11 @@ const routes = [
     component: ListadoServicios
   },
   {
+    path: '/crear-manzanas',
+    name: 'crear-manzanas',
+    component: CrearManzanas
+  },
+  {
     path: '/listado-establecimientos',
     name: 'listado-establecimientos',
     component: ListadoServicios

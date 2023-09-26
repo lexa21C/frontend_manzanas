@@ -1,25 +1,24 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="info" class="bg-nav">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      
+      <b-navbar-nav>
+        <b-navbar-brand href="#">Mujeres Cuidadoras</b-navbar-brand>
+      </b-navbar-nav>
+
+      <b-navbar-nav>
+        <b-nav-item to="registrar">
+          Registrar
+        </b-nav-item>
+        <b-nav-item to="login">
+          Login
+        </b-nav-item>
+        <b-nav-item class="text-white">Servicios</b-nav-item>
+      </b-navbar-nav>
 
       <b-collapse id="nav-collapse" is-nav>
-        <!-- Elementos alineados a la izquierda -->
-        <b-navbar-nav>
-          <b-nav-item href="#" class="ml-auto">Elemento Izquierda</b-nav-item>
-        </b-navbar-nav>
-        <!-- Elementos alineados a la derecha -->
-        <b-navbar-nav class="ml-auto justify-content-end">
-          <b-nav-item to="registrar">
-            Registrar
-          </b-nav-item>
-          <b-nav-item to="login">
-            Login
-          </b-nav-item>
-          <b-nav-item class="text-white">Servicios</b-nav-item>
-
+        <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown text="Manzanas" right>
             <b-dropdown-item to="listado-manzanas">Ver</b-dropdown-item>
             <b-dropdown-item to="crear-manzanas">Crear</b-dropdown-item>

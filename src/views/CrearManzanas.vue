@@ -2,11 +2,10 @@
   <b-container fluid>
     <b-row align-h="center" class="mt-5">
       <b-col cols="12" md="6">
-        <b-card>
+        <b-card class="transparent-card">
           <b-row class="text-center">
-            <h1>Crear una Manzana</h1>
+            <h1>Manzanas del Cuidado</h1>
           </b-row>
-
           <b-form @submit="agregarManzana">
             <!-- Campo para ingresar el código -->
             <b-form-group
@@ -45,10 +44,9 @@
               ></b-form-select>
             </b-form-group>
 
-            <!-- Botón para enviar el formulario -->
             <div class="m-2 text-center">
               <hr class="my-4">
-              <b-button class="button" type="submit" >Iniciar sesion</b-button>
+              <b-button class="button"  >Guardar</b-button>
             </div>
           </b-form>
         </b-card>
@@ -57,7 +55,6 @@
   </b-container>
 </template>
 
-<!-- Resto del código igual que en tu ejemplo anterior -->
 
 <script>
 export default {
@@ -83,3 +80,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+/* Cambiar el color del botón Registrar a #005B8F */
+.button{
+  background-color: #005B8F !important;
+}
+</style>

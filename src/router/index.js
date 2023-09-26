@@ -8,6 +8,7 @@ import CrearManzanas from '@/views/CrearManzanas.vue'
 import EditarManzanas from '@/views/EditarManzanas.vue'
 import CrearServicios from '@/views/CrearServicios.vue'
 import EditarServicios from '@/views/EditarServicios.vue'
+import CrearEstablecimiento from '@/views/CrearEstablecimiento.vue'
 import Login from '@/views/Login.vue'
 
 Vue.use(VueRouter)
@@ -29,9 +30,19 @@ const routes = [
     component: CrearManzanas
   },
   {
+    path: '/crear-servicios',
+    name: 'crear-servicios',
+    component: CrearServicios
+  },
+  {
     path: '/listado-establecimientos',
     name: 'listado-establecimientos',
-    component: ListadoServicios
+    component: ListadoEstablecimientos
+  },
+  {
+    path: '/crear-establecimientos',
+    name: 'crear-establecimientos',
+    component: CrearEstablecimiento
   },
   {
     path: '/registrar',

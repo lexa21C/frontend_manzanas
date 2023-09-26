@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '@/views/Home.vue'
 import ListadoManzanas from '@/views/ListadoManzanas.vue'
 import ListadoServicios from '@/views/ListadoServicios.vue'
 import Registrar from '@/views/Registrar.vue'
@@ -14,6 +15,11 @@ import Login from '@/views/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
   {
     path: '/listado-manzanas',
     name: 'listado-manzanas',

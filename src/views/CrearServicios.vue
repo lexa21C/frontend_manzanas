@@ -1,84 +1,84 @@
 <template>
-    <b-container>
-        <b-row align-h="center" class="mt-2">
-            <b-col cols="12" md="6">
-                <b-card class="transparent-card m-3" title="Servicio">
-                  <form @submit.prevent="agregarServicio">
-                    <!-- Campo para ingresar el código del servicio -->
-                    <b-form-group
-                      label="Código del Servicio"
-                      label-for="codigoInput"
-                    >
-                      <b-form-input
-                        id="codigoInput"
-                        v-model="nuevoServicio.codigo"
-                        required
-                      ></b-form-input>
-                    </b-form-group>
-            
-                    <!-- Campo para ingresar el nombre del servicio -->
-                    <b-form-group
-                      label="Nombre del Servicio"
-                      label-for="nombreInput"
-                    >
-                      <b-form-input
-                        id="nombreInput"
-                        v-model="nuevoServicio.nombre"
-                        required
-                      ></b-form-input>
-                    </b-form-group>
-            
-                    <!-- Campo para ingresar la descripción del servicio -->
-                    <b-form-group
-                      label="Descripción del Servicio"
-                      label-for="descripcionInput"
-                    >
-                      <b-form-textarea
-                        id="descripcionInput"
-                        v-model="nuevoServicio.descripcion"
-                        required
-                      ></b-form-textarea>
-                    </b-form-group>                 
-                  </form>
-                  <div class="m-2 text-center">
-                    <hr class="my-4">
-                    <b-button class="button" type="submit" >Guardar</b-button>
-                </div>
-                </b-card>
-                <div>
-              </div>
-            </b-col>
-        </b-row>
-    </b-container>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        nuevoServicio: {
-          codigo: '',
-          nombre: '',
-          descripcion: '',
-        },
-      };
-    },
-    methods: {
-      agregarServicio() {
-        // Aquí puedes enviar los datos de nuevoServicio al servidor para agregar el Servicio a la base de datos
-        // Luego, puedes realizar una redirección o mostrar un mensaje de éxito, etc.
-        console.log('Servicio a agregar:', this.nuevoServicio);
-      },
-    },
-  };
-  </script>
+  <b-container>
+    <b-row align-h="center" class="mt-2">
+      <b-col cols="12" md="6">
+        <b-card class="transparent-card m-3" title="Servicio">
+          <form @submit.prevent="agregarServicio">
+            <!-- Campo para ingresar el nombre del servicio -->
+            <b-form-group label="Nombre del Servicio" label-for="nombreInput">
+              <b-form-input id="nombreInput" v-model="nuevoServicio.codigo" required></b-form-input>
+            </b-form-group>
+            <b-form-group label="Nombre del Servicio" label-for="nombreInput">
+              <b-form-input id="nombreInput" v-model="nuevoServicio.nombre" required></b-form-input>
+            </b-form-group>
 
+            <!-- Campo para ingresar la descripción del servicio -->
+            <b-form-group label="Descripción del Servicio" label-for="descripcionInput">
+              <b-form-textarea id="descripcionInput" v-model="nuevoServicio.descripcion" required></b-form-textarea>
+            </b-form-group>
+
+            <!-- Campo para ingresar la fecha del servicio usando b-form-input -->
+            <b-form-group label="Fecha del Servicio" label-for="fechaInput">
+              <b-form-input type="date" id="fechaInput" v-model="nuevoServicio.fecha" required></b-form-input>
+            </b-form-group>
+
+            <!-- Campo para ingresar la hora del servicio -->
+            <b-form-group label="Hora del Servicio" label-for="horaInput">
+              <b-form-input id="horaInput" v-model="nuevoServicio.hora" type="time" required></b-form-input>
+            </b-form-group>
+
+            <div class="m-2 text-center">
+              <hr class="my-4">
+              <b-button class="button" type="submit">Guardar</b-button>
+            </div>
+          </form>
+        </b-card>
+        <div></div>
+      </b-col>
+    </b-row>
+  </b-container>
+</template>
+<script>
+import router from '@/router';
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      manzanas:null,
+      nuevoServicio: {
+        codigo: '',
+        nombre: '',
+        descripcion: '',
+        fecha:null,
+        hora:null,
+      },
+    };
+  },
+  methods: {
+    agregarServicio() {
+      axios
+        .post('agregar_servicio', this.nuevoServicio)
+        .then((response) => {
+          // El servicio se ha agregado correctamente, puedes mostrar una notificación o redirigir al usuario si es necesario.
+          console.log('Servicio agregado con éxito:', response.data);
+          this.router.push('lista-servicios')
+        })
+        .catch((error) => {
+          // Manejo de errores en caso de que la solicitud falle
+          console.error('Error al agregar el servicio:', error);
+        });
+    },
+  },
+
+  mounted(){
+    this.listarManzanas()
+  }
+};
+</script>
 
 <style scoped>
-
-
 /* Cambiar el color del botón Registrar a #005B8F */
-.button{
+.button {
   background-color: #005B8F !important;
 }
 </style>

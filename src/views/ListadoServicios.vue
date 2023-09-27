@@ -21,12 +21,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="item in servicios" :key="item.id" :value="item.id">
               <td>
-                nombre
+                {{ item.nombre }}
               </td>
               <td>
-                descripcion
+                {{ item.descripcion }}
               </td>
               <td>
                 <button class="btn btn-outline-secondary">
@@ -38,21 +38,61 @@
                 </b-button>
               </td>
               <td>
-                <b-button class="m-1" variant="outline-primary">
-                  <b-icon icon="eye">
-                  </b-icon>
-                </b-button>
-                <b-button class="m-1" variant="outline-warning">
-                  <b-icon icon="pencil-square">
-                  </b-icon>
-                </b-button>
-                <b-button class="m-1" variant="outline-danger">
-                  <b-icon icon="trash">
-                  </b-icon>
-                </b-button>
+                <div class="d-flex align-items-center">
+                  <DetalleServicio :idServicios="item.id_servicio"></DetalleServicio>
+                  <EditarServicio :idServicios="item.id_servicio"></EditarServicio>
+                  <Eliminar @confirmed="eliminarServicio(item.id_servicio)"></Eliminar>
+            </div>
               </td>
             </tr>
           </tbody>
         </table>
     </div>
 </template>
+
+<script>
+import Eliminar from '@/components/Eliminar.vue'
+import EditarServicio from '@/components/servicios/EditarServicio.vue'
+import DetalleServicio from '@/components/servicios/DetalleServicios.vue';
+import axios from 'axios';
+
+export default {
+  components:{
+    Eliminar,
+    DetalleServicio,
+    EditarServicio
+  },
+  data() {
+    return {
+      servicios: [], // Aquí almacenaremos la lista de servicios
+    };
+  },
+  methods: {
+    // Método para listar servicios desde tu API
+    async listarServicios() {
+      try {
+        const response = await axios.get('listar_servicios'); // Reemplaza '/api/servicios' con la URL correcta de tu API
+        this.servicios = response.data; // Almacena la lista de servicios en la variable servicios
+      } catch (error) {
+        console.error('Error al listar servicios:', error);
+      }
+    },
+    
+    // Método para eliminar un servicio
+    async eliminarServicio(id) {
+      try {
+        const response = await axios.delete(`eliminar_servicio/${id}`); // Reemplaza '/api/servicios' con la URL correcta de tu API
+        console.log('Servicio eliminado con éxito:', response.data);
+        // Actualiza la lista de servicios después de eliminar
+        this.listarServicios();
+      } catch (error) {
+        console.error('Error al eliminar servicio:', error);
+      }
+    },
+  },
+  mounted() {
+    // Llama al método listarServicios cuando el componente se monta
+    this.listarServicios();
+  },
+};
+</script>

@@ -72,11 +72,7 @@
       };
     },
     methods: {
-      agregarManzana() {
-        // Aquí puedes enviar los datos de nuevaManzana al servidor para agregar la Manzana del Cuidado a la base de datos
-        // Luego, puedes realizar una redirección o mostrar un mensaje de éxito, etc.
-        console.log('Manzana a agregar:', this.nuevaManzana);
-      },
+      
     },
   };
   </script>

@@ -1,10 +1,8 @@
 <template>
-  <div class="container ">
-    <div class="row m-10">
-
-    </div>
-    <div class="row text-center ">
-      <h1>Listado de Servicios</h1>
+  <div class="container">
+    <div class="row m-10"></div>
+    <div class="row text-center">
+      <h1>Listado de Manzanas</h1>
     </div>
     <div>
       <b-input-group size="sm" class="mb-2">
@@ -19,47 +17,25 @@
         <tr>
           <th scope="col">Manzana</th>
           <th scope="col">Servicios</th>
-          <th scope="col">acciones</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>nombre</td>
+        <tr v-for="item in manzanas" :key="item.id" :value="item.id">
+          <td>{{ item.nombre }}</td>
           <td>
-            <button class="btn btn-outline-secondary">Registrar</button>
-            <b-button class="m-1" variant="outline-primary">
-              <b-icon icon="eye"></b-icon>
-              <span v-if="showText === 'eye'">Ver</span>
-            </b-button>
+            <!-- Columna para CrearServicio -->
+            <div class="d-flex justify-content-between align-items-center">
+              <CrearServicio :idManzana="item.id_manzana"></CrearServicio>
+            </div>
           </td>
           <td>
-            <b-button
-              class="m-1"
-              variant="outline-primary"
-              @mouseover="showText = 'eye'"
-              @mouseleave="showText = ''"
-            >
-              <b-icon icon="eye"></b-icon>
-              <span v-if="showText === 'eye'">Ver</span>
-            </b-button>
-            <b-button
-              class="m-1"
-              variant="outline-warning"
-              @mouseover="showText = 'pencil'"
-              @mouseleave="showText = ''"
-            >
-              <b-icon icon="pencil-square"></b-icon>
-              <span v-if="showText === 'pencil'">Editar</span>
-            </b-button>
-            <b-button
-              class="m-1"
-              variant="outline-danger"
-              @mouseover="showText = 'trash'"
-              @mouseleave="showText = ''"
-            >
-              <b-icon icon="trash"></b-icon>
-              <span v-if="showText === 'trash'">Borrar</span>
-            </b-button>
+            <!-- Columna para los botones de acciones -->
+            <div class="d-flex align-items-center">
+              <DetalleManzana :idManzana="item.id_manzana"></DetalleManzana>
+              <EditarManzana :idManzana="item.id_manzana"></EditarManzana>
+              <Eliminar @confirmed="eliminarManzana(item.id)"></Eliminar>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -68,12 +44,73 @@
 </template>
 
 <script>
+import CrearServicio from '@/components/manzana/CrearServicio.vue';
+import DetalleManzana from '@/components/manzana/DetalleManzana.vue';
+import EditarManzana from '@/components/manzana/EditarManzana.vue';
+import Eliminar from '@/components/Eliminar.vue';
+import axios from 'axios';
+
 export default {
+  components: {
+    CrearServicio,
+    DetalleManzana,
+    EditarManzana,
+    Eliminar,
+  },
   data() {
     return {
-      showText: '', // Variable para controlar el texto a mostrar
+      showText: '',
+      manzanas: [],
     };
   },
+  methods: {
+    eliminarManzana(id) {
+      console.log('Evento "confirmed" emitido, ID de la manzana:', id);
+      axios
+        .delete(`eliminar_manzana/${id}`)
+        .then((response) => {
+          console.log('Manzana eliminada con éxito:', response.data);
+          // Cierra el modal después de eliminar
+
+          this.listarManzanas()
+          this.modalVisible = false;
+        })
+        .catch((error) => {
+          // Manejo de errores
+          console.log(error);
+        });
+    },
+    listarManzanas() {
+      // Realiza la solicitud GET a la URL listar_manzanas
+      axios
+        .get('listar_manzanas')
+        .then((response) => {
+          // Almacena los datos de las manzanas en la variable manzanas
+          this.manzanas = response.data;
+        })
+        .catch((error) => {
+          console.error('Error al obtener la lista de manzanas:', error);
+        });
+    },
+  },
+  watch: {
+    // Observa la propiedad manzanaActualizada del componente hijo
+    'EditarManzana.manzanaActualizada': function (nuevoValor) {
+      if (nuevoValor) {
+        // Cuando manzanaActualizada cambia a true en el componente hijo,
+        // llama al método para actualizar la lista de manzanas
+        this.actualizarListaManzanas();
+
+        // Restablece la propiedad manzanaActualizada en el componente hijo a false
+        this.$refs.editarManzana.manzanaActualizada = false;
+      }
+    },
+  },
+  mounted() {
+  // Llama al método listarManzanas cuando el componente se monta
+  this.listarManzanas();
+
+},
+
 };
 </script>
-

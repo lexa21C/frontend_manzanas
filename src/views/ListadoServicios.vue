@@ -39,8 +39,8 @@
               </td>
               <td>
                 <div class="d-flex align-items-center">
-                  <DetalleServicio :idServicios="item.id_servicio"></DetalleServicio>
-                  <EditarServicio :idServicios="item.id_servicio"></EditarServicio>
+                  <DetalleServicio :idServicio="item.id_servicio"></DetalleServicio>
+                  <EditarServicio :idServicio="item.id_servicio"></EditarServicio>
                   <Eliminar @confirmed="eliminarServicio(item.id_servicio)"></Eliminar>
             </div>
               </td>

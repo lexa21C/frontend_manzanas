@@ -4,7 +4,7 @@
       <b-icon icon="eye"></b-icon>
     </b-button>
 
-    <b-modal id="modal-1" title="Servicio" v-model="modalVisible" ok-title="Guardar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
+    <b-modal id="modal-1" title="Detalle del Servicio" v-model="modalVisible" ok-title="Guardar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
       <b-card class="transparent-card m-3" :title="manzana">
           <b-card-text>
             <p><strong>Código del servicio:</strong> {{ servicio.codigo }}</p>
@@ -23,10 +23,9 @@
 import axios from 'axios';
 
 export default {
-  props: ['idServicios'],
+  props: ['idServicio'],
   data() {
     return {
-      manzanaActualizada: false, 
       modalVisible: false,
       manzana: null,
       servicio: {
@@ -41,24 +40,12 @@ export default {
   methods: {
     mostrarModal() {
       // Cargar los datos de la manzana solo cuando se hace clic en el botón para abrir el modal
-      this.cargarDatosManzana();
-      this.listarMunicipios()
+      this.cargarDatosServicio()
       this.modalVisible = true;
     },
-    cargarDatosManzana() {
+    cargarDatosServicio() {
       // Realizar una solicitud GET para obtener los datos de la manzana
       axios.get(`listar_servicio/${this.idServicio}`)
-        .then(response => {
-          this.manzana = response.data.nombre
-         
-        })
-        .catch(error => {
-          console.error('Error al cargar los datos de la manzana:', error);
-        });
-      },
-    cargarDatosServicios() {
-      // Realizar una solicitud GET para obtener los datos de la manzana
-      axios.get(`/listar_servicio/${this.idServicio}`)
         .then(response => {
           this.servicio.codigo = response.data.mensajes.codigo; 
           this.servicio.nombre = response.data.mensajes.nombre; 
@@ -76,8 +63,8 @@ export default {
       this.modalVisible = false;
     },
   },
-  mounted:{
-    
+  mounted(){
+    this.servicio()
   }
 };
 </script>

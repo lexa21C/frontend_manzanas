@@ -4,13 +4,13 @@
       <b-icon icon="pencil-square"></b-icon>
     </b-button>
 
-    <b-modal id="modal-1" title="Servicio" v-model="modalVisible" ok-title="Guardar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
+    <b-modal id="modal-1" title="Actualizar Servicio" v-model="modalVisible" ok-title="Actualizar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
       <b-card class="transparent-card m-3" title="Servicio">
         <!-- Aquí puedes mostrar el valor de idManzana -->
 
-        <form @submit.prevent="agregarServicio">
+        <form >
             <!-- Campo para ingresar el nombre del servicio -->
-            <b-form-group label="Nombre del Servicio" label-for="nombreInput">
+            <b-form-group label="Codigo del Servicio" label-for="nombreInput">
               <b-form-input id="nombreInput" v-model="servicio.codigo" required></b-form-input>
             </b-form-group>
             <b-form-group label="Nombre del Servicio" label-for="nombreInput">
@@ -39,8 +39,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  props: ['idServicios'], // Declara una propiedad llamada idManzana
+  props: ['idServicio'], // Declara una propiedad llamada idManzana
   data() {
     return {
       modalVisible: false,
@@ -55,12 +56,14 @@ export default {
   },
   methods: {
       mostrarModal() {
+        this.cargarDatosServicios()
           this.modalVisible = true;
       },
       cargarDatosServicios() {
       // Realizar una solicitud GET para obtener los datos de la manzana
-        axios.get(`/listar_servicio/${this.idServicio}`)
+        axios.get(`listar_servicio/${this.idServicio}`)
         .then(response => {
+          console.log(response)
           this.servicio.codigo = response.data.mensajes.codigo; 
           this.servicio.nombre = response.data.mensajes.nombre; 
           this.servicio.descripcion = response.data.mensajes.descripcion;
@@ -72,17 +75,6 @@ export default {
         });
     },
 
-    agregarServicio() {
-      // Aquí puedes acceder al valor de idManzana
-      console.log('Id de Manzana:', this.idManzana);
-
-      // También puedes enviar los datos de nuevoServicio al servidor para agregar el Servicio a la base de datos
-      // Luego, puedes realizar una redirección o mostrar un mensaje de éxito, etc.
-
-      // Cierra el modal después de enviar el formulario
-      this.modalVisible = false;
-    },
-
     cancelarModal() {
       // Lógica para cancelar o cerrar el modal sin guardar
       // Por ejemplo:
@@ -91,6 +83,7 @@ export default {
       this.modalVisible = false;
     },
   },
+ 
 };
 </script>
 

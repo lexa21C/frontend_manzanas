@@ -105,7 +105,7 @@ export default {
     },
     cargarDatosManzana() {
       // Realizar una solicitud GET para obtener los datos de la manzana
-      axios.get(`/listar_manzana/${this.idManzana}`)
+      axios.get(`listar_manzana/${this.idManzana}`)
         .then(response => {
           console.log(response)
           this.manzana.codigo = response.data.mensajes.codigo; 

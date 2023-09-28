@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row m-10"></div>
+    <div class="row m-10 mt-5"></div>
     <div class="row text-center">
       <h1>Listado de Manzanas</h1>
     </div>
@@ -25,7 +25,7 @@
           <td>{{ item.nombre }}</td>
           <td>
             <!-- Columna para CrearServicio -->
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center" >
               <CrearServicio :idManzana="item.id_manzana"></CrearServicio>
             </div>
           </td>

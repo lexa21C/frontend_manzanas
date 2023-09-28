@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-button  class="m-1"  variant="outline-dark" @click="mostrarModal">
-      <b-icon icon="eye"></b-icon>
       <span>Ver</span>
     </b-button>
 

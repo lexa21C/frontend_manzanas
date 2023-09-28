@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <div>
+    <div class="mt-5">
       
-    </div>
+    
       <div class="row text-center m-3">
           <h1>Listado de Establecimientos</h1>
       </div>
@@ -37,6 +37,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
   </div>
 </template>
 

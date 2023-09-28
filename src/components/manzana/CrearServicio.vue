@@ -1,8 +1,6 @@
 <template>
   <div>
     <b-button   variant="outline-dark m-1" @click="mostrarModal">
-      <b-icon icon="plus-
-"></b-icon>
       <span>Agregar</span>
     </b-button>
 

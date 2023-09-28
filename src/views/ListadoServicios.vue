@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+      <div class="mt-5">
         <div class="row text-center">
             <h1>Listado de Servicios</h1>
         </div>
@@ -48,6 +49,7 @@
           </tbody>
         </table>
     </div>
+  </div>
 </template>
 
 <script>

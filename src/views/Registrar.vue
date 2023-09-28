@@ -1,6 +1,7 @@
 <template>
+  
   <b-container>
-    <b-row>
+    <b-row class="justify-content-center">
       <b-col cols="6">
         <b-card class="m-2">
           <div class="text-center">
@@ -159,6 +160,7 @@
       </b-col>
     </b-row>
   </b-container>
+</div>
 </template>
 
   
@@ -229,5 +231,30 @@ export default {
   },
 };
 </script>
-  <style>
+<style scoped>
+.background-image {
+  background-image: url('../assets/registrar.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.transparent-card {
+  background-color: rgb(255, 255, 255); /* Fondo semitransparente */
+  padding: 20px;
+  margin: 60px;
+  margin-top: 150px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Aplicar sombra */
+
+}
+/* Cambiar el color del botón Registrar a #005B8F */
+.button{
+  background-color: #005B8F !important;
+}
 </style>

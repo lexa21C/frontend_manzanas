@@ -1,7 +1,8 @@
 <template>
     <div>
-      <b-button @click="showConfirmationDialog">
+      <b-button  class="m-1" variant="outline-danger" @click="showConfirmationDialog">
         <b-icon icon="trash"></b-icon>
+        <span>Eliminar</span>
       </b-button>
     </div>
   </template>

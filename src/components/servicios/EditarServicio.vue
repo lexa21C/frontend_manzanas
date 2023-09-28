@@ -1,7 +1,8 @@
 <template>
   <div>
-    <b-button @click="mostrarModal">
+    <b-button   variant="outline-dark m-1" @click="mostrarModal">
       <b-icon icon="pencil-square"></b-icon>
+      <span>Editar</span>
     </b-button>
 
     <b-modal id="modal-1" title="Actualizar Servicio" v-model="modalVisible" ok-title="Actualizar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <b-button @click="mostrarModal">
-      <b-icon icon="pencil-square"></b-icon>
+    <b-button   variant="outline-dark m-1" @click="mostrarModal">
+      <b-icon icon="plus-
+"></b-icon>
+      <span>Agregar</span>
     </b-button>
 
     <b-modal id="modal-1" title="Servicio" v-model="modalVisible" ok-title="Guardar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
@@ -59,6 +61,7 @@ export default {
   data() {
     return {
       modalVisible: false,
+      municipios:[],
       nuevoServicio: {
       codigo: '',
       nombre: '',
@@ -71,6 +74,18 @@ export default {
   methods: {
     mostrarModal() {
       this.modalVisible = true;
+    },
+    listarMunicipios() {
+      // Realiza la solicitud GET a la URL listar_municipios
+      axios.get('listar_municipios')
+        .then(response => {
+          // Almacena los datos de las municipios en la variable municipios
+          this.municipios = response.data;
+          console.log(this.municipios)
+        })
+        .catch(error => {
+          console.error('Error al obtener la lista de manzanas:', error);
+        });
     },
     listarManzanas() {
     // Realiza la solicitud GET a la URL listar_manzanas
@@ -110,6 +125,7 @@ export default {
   },
   
   mounted(){
+    this.listarMunicipios()
     this.listarManzanas()
   }
 };

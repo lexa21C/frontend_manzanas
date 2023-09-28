@@ -8,7 +8,7 @@
             <b-input-group-prepend is-text>
               <b-icon icon="search"></b-icon>
             </b-input-group-prepend>
-            <b-form-input type="search" placeholder="Buscar manzanas"></b-form-input>
+            <b-form-input type="search" placeholder="Buscar servicios"></b-form-input>
           </b-input-group>
         </div>
         <table class="table table-striped table-hover">

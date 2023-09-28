@@ -1,47 +1,38 @@
 <template>
   <div class="container">
-      <div class="row text-center">
+    <div>
+      
+    </div>
+      <div class="row text-center m-3">
           <h1>Listado de Establecimientos</h1>
       </div>
-      <div>
+      <div class="mb-2">
         <b-input-group size="sm" class="mb-2">
           <b-input-group-prepend is-text>
             <b-icon icon="search"></b-icon>
           </b-input-group-prepend>
-          <b-form-input type="search" placeholder="Buscar manzanas"></b-form-input>
+          <b-form-input type="search" placeholder="Buscar establecimientos"></b-form-input>
         </b-input-group>
       </div>
-      <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover m-4">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Dirección</th>    
             <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for="item in establecimientos" :key="item.id" :value="item.id">
             <td>
-              nombre
+              {{ item.nombre }}
             </td>
             <td>
-              <button type="button" class="btn btn-outline-secondary">
-                Registrar
-              </button>
-            </td>
-            <td>
-              <b-button class="m-1" variant="outline-primary">
-                <b-icon icon="eye">
-                </b-icon>
-              </b-button>
-              <b-button class="m-1" variant="outline-warning">
-                <b-icon icon="pencil-square">
-                </b-icon>
-              </b-button>
-              <b-button class="m-1" variant="outline-danger">
-                <b-icon icon="trash">
-                </b-icon>
-              </b-button>
+              <div class="d-flex align-items-center">
+              <DetalleEstablecimiento :idEstablecimiento="item.id"></DetalleEstablecimiento>
+              <EditarEstablecimiento :idEstablecimiento="item.id"></EditarEstablecimiento>
+              <Eliminar @confirmed="eliminarEstablecimiento(item.id)"></Eliminar>
+            </div>
+              
             </td>
           </tr>
         </tbody>
@@ -50,22 +41,54 @@
 </template>
 
 <script>
+import axios from 'axios';
+import Eliminar from '@/components/Eliminar.vue';
+import DetalleEstablecimiento from '@/components/establecimientos/DetalleEstablecimiento.vue';
+import EditarEstablecimiento from '@/components/establecimientos/editarEstablecimiento.vue';
+
 export default {
+  components:{
+    Eliminar,
+    DetalleEstablecimiento,
+    EditarEstablecimiento
+},
 data(){
   return{
-    manzanas:null
+    establecimientos:null
   }
 },
 methods:{
-  async getManzanas(){
-    await axios.post('listado_manzanas')
-    .then(response => {
-      this.manzanas=response.data
-    })
-    .catch(error =>{
-      console.log(error)
-    })
+  eliminarEstablecimiento(id) {
+    console.log('Evento "confirmed" emitido, ID de la manzana:', id);
+    axios
+      .delete(`eliminar_establecimiento/${id}`)
+      .then((response) => {
+        console.log('Manzana eliminada con éxito:', response.data);
+        // Cierra el modal después de eliminar
+        this.listarestablecimientos()
+        this.modalVisible = false;
+      })
+      .catch((error) => {
+        // Manejo de errores
+        console.log(error);
+      });
+    },
+  listarestablecimientos() {
+      // Realiza la solicitud GET a la URL listar_manzanas
+      axios
+        .get('listar_establecimientos')
+        .then((response) => {
+          // Almacena los datos de las establecimientos en la variable establecimientos
+          this.establecimientos = response.data.mensaje;
+          console.log(this.establecimientos)
+        })
+        .catch((error) => {
+          console.error('Error al obtener la lista de establecimientos:', error);
+        });
+    },
+  },
+  mounted(){
+    this.listarestablecimientos()
   }
-}
 }
 </script>

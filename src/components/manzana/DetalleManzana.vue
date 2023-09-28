@@ -1,14 +1,15 @@
 <template>
   <div>
-    <b-button @click="mostrarModal">
+    <b-button  class="m-1"  variant="outline-dark" @click="mostrarModal">
       <b-icon icon="eye"></b-icon>
+      <span>Ver</span>
     </b-button>
 
     <b-modal id="modal-1" :title="manzana.nombre" v-model="modalVisible" ok-title="Guardar" cancel-title="Cancelar" @ok="guardarServicio" @cancel="cancelarModal">
       <b-card class="transparent-card m-3" >
           <b-card-text>
               <p><strong>Código:</strong> {{ manzana.codigo }}</p>
-              <p><strong>Municipio :</strong> {{ manzana.municipio_id }}</p>
+              <p><strong>Municipio :</strong> {{ manzana.municipio }}</p>
               <p><strong>localidad:</strong> {{ manzana.localidad }}</p>
               <p><strong>Direccion:</strong> {{ manzana.direccion }}</p>
           </b-card-text>   

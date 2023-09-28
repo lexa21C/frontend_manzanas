@@ -1,7 +1,8 @@
 <template>
   <div>
-    <b-button @click="mostrarModal">
+    <b-button   variant="outline-dark m-1" @click="mostrarModal">
       <b-icon icon="pencil-square"></b-icon>
+      <span>Editar</span>
     </b-button>
     <b-modal id="modal-1"  :title="idManzana" v-model="modalVisible" ok-title="Actualizar" cancel-title="Cancelar" @ok="actualizarManzana" @cancel="cancelarModal">
       <b-card class="transparent-card m-3" title="">
@@ -98,6 +99,7 @@ export default {
         .then(response => {
           // Almacena los datos de las municipios en la variable municipios
           this.municipios = response.data;
+          console.log(this.municipios)
         })
         .catch(error => {
           console.error('Error al obtener la lista de manzanas:', error);

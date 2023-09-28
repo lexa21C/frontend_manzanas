@@ -109,7 +109,7 @@ export default {
 
       // Realiza una solicitud POST al servidor para agregar el "establecimiento"
       axios
-        .post('/api/agregar-establecimiento', establecimientoData) // Reemplaza '/api/agregar-establecimiento' con tu endpoint de API real
+        .post('agregar_establecimiento', establecimientoData) // Reemplaza '/api/agregar-establecimiento' con tu endpoint de API real
         .then((response) => {
           // Maneja la respuesta del servidor
           console.log('Establecimiento agregado:', response.data);
